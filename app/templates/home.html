@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #111; /* Dark background color */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Center the content vertically */
+            height: 100vh; /* Full screen height */
+            color: #f1f1f1; /* Light color for text */
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            background-color: #222; /* Darker background */
+            width: 300px;
+            padding: 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: center;
+        }
+
+        /* Name section with large "G" */
+        .name-section {
+            background-color: #1e90ff; /* Soft blue color */
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+        }
+
+        .large-letter {
+            font-size: 7em; /* Larger size for the letter G */
+            font-weight: bold;
+            color: white;
+        }
+
+        .name-text {
+            font-size: 2.8em; /* Slightly larger than before */
+            color: white;
+            margin-top: 15px;
+        }
+
+        .role-text {
+            font-size: 1.3em;
+            color: #bbb;
+            margin-top: 5px;
+        }
+
+        /* Horizontal Line after Name Section */
+        .horizontal-line {
+            width: 80%;
+            border: 1px solid #bbb;
+            margin: 25px auto;
+        }
+
+        /* Sidebar links as horizontal lines */
+        .sidebar a {
+            font-size: 1.3em;
+            color: #FFFFFF;
+            text-decoration: none;
+            margin: 15px 0;
+            display: block;
+            border-bottom: 1px solid #555; /* Darker line under links */
+            padding: 12px;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+        }
+
+        .sidebar a:hover {
+            background-color: #555; /* Darken background on hover */
+            color: #1e90ff; /* Change text color to blue on hover */
+        }
+
+        /* Main Content Section */
+        .main-content {
+            margin-left: 320px; /* Add space for sidebar */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align left */
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .name {
+            font-size: 4em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #1e90ff; /* Add the same blue color for consistency */
+        }
+
+        .roles {
+            font-size: 1.6em;
+            color: #bbb;
+            margin-top: 15px;
+        }
+
+        /* Contact Me Box */
+        .contact-box {
+            margin-top: 50px;
+            padding: 25px;
+            background-color: #111; /* Black background for the box */
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #1e90ff; /* Blue border around the box */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+        }
+
+        .contact-box a {
+            font-size: 1.7em;
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+            color: white; /* White on hover */
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 220px;
+            }
+
+            .main-content {
+                margin-left: 240px;
+            }
+
+            .name {
+                font-size: 2.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 180px;
+            }
+
+            .main-content {
+                margin-left: 200px;
+            }
+
+            .name {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Name section with large "G" -->
+            <div class="name-section">
+                <div class="large-letter">G</div>
+                <div class="name-text">Gokul</div>
+                <div class="role-text">Software Developer</div>
+            </div>
+
+            <!-- Horizontal line after name section -->
+
+            <!-- Navigation Links as horizontal lines -->
+            <a href="/projects/">Projects</a>
+            <a href="/skills/">Skills</a>
+            <a href="/experience/">Experience</a>
+        </div>
+
+        <!-- Main Content (Centered Name) -->
+        <div class="main-content">
+            <div class="name">Gokul Gopan</div>
+            <!-- Added Roles -->
+            <div class="roles">
+                <div>Python Django Full Stack Developer / RPA Automation Developer</div>
+            </div>
+
+            <!-- Contact Me Box -->
+            <div class="contact-box">
+                <a href="contact">Contact Me</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Skills</title>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #343A40;
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: auto;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            padding: 20px;
+            background-color: #212529;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-top: 20px; /* Added margin for spacing */
+        }
+
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 30px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background-color: #2C3E50;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .skill-card h2 {
+            color: #007BFF;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+
+        .skill-card p {
+            font-size: 1.1em;
+            color: #bbb;
+            margin-bottom: 10px;
+        }
+
+        .skill-card .level {
+            font-size: 1.2em;
+            color: #F39C12;
+        }
+
+        .skill-card .experience {
+            font-size: 1.1em;
+            color: #2ECC71;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-button a {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+
+        .back-button a:hover {
+            background-color: #0056B3;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #bbb;
+        }
+
+        /* Media Query for smaller screens */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .skill-card h2 {
+                font-size: 1.4em;
+            }
+
+            .skill-card p {
+                font-size: 1em;
+            }
+
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .skill-card h2 {
+                font-size: 1.2em;
+            }
+
+            .skill-card p {
+                font-size: 0.9em;
+            }
+
+            .skill-card .level {
+                font-size: 1.1em;
+            }
+
+            .skill-card .experience {
+                font-size: 1em;
+            }
+
+            .back-button a {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Skills</h1>
+
+        <!-- Skills Grid -->
+        <div class="skills-grid">
+            <!-- Skill 1 -->
+            <div class="skill-card">
+                <h2>Python</h2>
+                <p>Programming Language</p>
+                <div class="level">Level: Advanced</div>
+                <div class="experience">Experience: 2+ years</div>
+            </div>
+
+            <!-- Skill 2 -->
+            <div class="skill-card">
+                <h2>Django</h2>
+                <p>Web Development Framework</p>
+                <div class="level">Level: Intermediate</div>
+                <div class="experience">Experience: 1+ years</div>
+            </div>
+
+            <!-- Skill 3 -->
+            <div class="skill-card">
+                <h2>JavaScript</h2>
+                <p>Front-end Development</p>
+                <div class="level">Level: Intermediate</div>
+                <div class="experience">Experience: 1+ years</div>
+            </div>
+
+            <!-- Skill 4 -->
+            <div class="skill-card">
+                <h2>MySQL</h2>
+                <p>Database Management</p>
+                <div class="level">Level: Advanced</div>
+                <div class="experience">Experience: 2+ years</div>
+            </div>
+
+            <!-- Skill 5 -->
+            <div class="skill-card">
+                <h2>RPA (Selenium)</h2>
+                <p>Automation Technologies</p>
+                <div class="level">Level: Advanced</div>
+                <div class="experience">Experience: 1.6+ years</div>
+            </div>
+
+            <!-- Skill 6 -->
+            <div class="skill-card">
+                <h2>GIT</h2>
+                <p>Version Control System</p>
+                <div class="level">Level: Intermediate</div>
+                <div class="experience">Experience: 1+ year</div>
+            </div>
+
+            <!-- Skill 7 -->
+            <div class="skill-card">
+                <h2>Angular</h2>
+                <p>Front-End Framework</p>
+                <div class="level">Level: Beginner</div>
+                <div class="experience">Experience: 8 months</div>
+            </div>
+
+            <!-- Skill 8 -->
+            <div class="skill-card">
+                <h2>jQuery</h2>
+                <p>JavaScript Library for DOM Manipulation</p>
+                <div class="level">Level: Beginner</div>
+                <div class="experience">Experience: 8 months</div>
+            </div>
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="back-button">
+            <a href="{% url 'home' %}">Back to Home</a>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>&copy; 2025 Gokul Gopan | All Rights Reserved</p>
+        </div>
+    </div>
+</body>
+</html>
