@@ -353,28 +353,22 @@ section.active .section-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
+/* Remove the old pseudo-element */
 .expand-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--style-color);
-  transform: scale(0);
-  border-radius: 50%;
-  transition: transform 0.3s ease;
+  display: none;
+  content: none;
 }
 
+/* Hover effect: just color change */
 .expand-btn:hover {
-  background: var(--text-color);
-  color: var(--bg-color);
-  transform: scale(1.1);
+  color: var(--text-color);         /* or any highlight color you want */
+  border-color: #a8e7a8;
+  background: transparent; /* keep background transparent */
 }
 
 .expand-btn:hover::before {
@@ -837,11 +831,10 @@ section:hover .section-divider {
   background-color: var(--bg-color);
   padding: 10px 20px;
   z-index: 1000;
-  display: flex;           /* flex layout */
-  justify-content: center; /* keep li items centered */
+  display: flex;
+  justify-content: center;
   align-items: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  gap: 20px;               /* space between UL and icon */
 }
 
 .top-navbar ul {
@@ -850,29 +843,48 @@ section:hover .section-divider {
   list-style: none;
   display: flex;
   gap: 30px;
-}
-
-.theme-toggle { position: fixed; top: 10px; right: 10px; font-size: 1.3rem; cursor: pointer; z-index: 1001; /* above navbar */ }
-
-.theme-toggle:hover {
-  transform: scale(1.2);
-  color: var(--signature-color);
+  align-items: center;
 }
 
 .top-navbar li {
   cursor: pointer;
   color: var(--text-color);
   font-weight: 500;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
+/* Hover Effects */
 .top-navbar li:hover {
   color: var(--style-color);
+  transform: translateY(-2px);
 }
 
+/* Active item underline */
 .top-navbar li.active {
   color: var(--style-color);
-  border-bottom: 2px solid #d0e485;
+}
+
+.top-navbar li.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #d0e485;
+  border-radius: 2px;
+}
+
+/* Inline theme toggle */
+.theme-toggle {
+  font-size: 1.3rem;
+  margin-left: 10px;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg) scale(1.2);
+  color: var(--signature-color);
 }
 
 /* Animation Classes */
@@ -1017,9 +1029,10 @@ section:hover .section-divider {
     opacity: 1;
   }
 }
-
 /* Mobile Responsive - Only for screens up to 720px */
 @media (max-width: 720px) {
+   body, html {
+    overflow-x: hidden;}
   .portfolio-container {
     overflow: visible;
     height: auto;
@@ -1045,7 +1058,6 @@ section:hover .section-divider {
     position: relative;
   }
 
-  /* Remove the active class filtering that hides other sections */
   section:not(.active) {
     display: flex !important;
     opacity: 1 !important;
@@ -1057,21 +1069,60 @@ section:hover .section-divider {
     transform: none !important;
   }
 
-  /* Remove any transitions that might interfere */
   section .section-content {
     transition: none !important;
   }
 
-  /* Adjust navbar for mobile */
+  /* Navbar adjustments */
+  .top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    padding: 10px 15px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
   .top-navbar ul {
+    display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    padding: 0 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
   }
 
   .top-navbar li {
     font-size: 0.9rem;
-    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* space for theme toggle */
+  }
+
+  /* Keep theme toggle inline with Contact */
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .theme-toggle {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .theme-toggle:hover {
+    transform: rotate(20deg) scale(1.2);
+    color: var(--signature-color);
   }
 
   /* Hide arrows on mobile */
@@ -1084,16 +1135,21 @@ section:hover .section-divider {
   .personal-photo-container {
     flex-direction: column;
     text-align: center;
+    padding: 0 15px;
     gap: 30px;
   }
 
   .personal-text {
-    padding-right: 0;
-  }
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  text-align: center; /* align text nicely on small screens */
+}
+
 
   .personal-text p {
-    font-size: 2.5rem;
-  }
+  word-break: break-word; /* prevent large text from overflowing */
+}
 
   .personal-text p:last-child {
     font-size: 1.2rem;
@@ -1117,9 +1173,12 @@ section:hover .section-divider {
 
   /* Skills section mobile */
   .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-  }
+  width: 100%;
+  max-width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+  justify-items: center;
+}
 
   .circle-container {
     width: 100px;
@@ -1136,6 +1195,32 @@ section:hover .section-divider {
     flex-direction: column;
     text-align: center;
     gap: 15px;
+  }
+
+  /* Project modal adjustments */
+  .project-modal {
+    align-items: flex-start; /* start from top */
+    padding: 10px;
+  }
+
+  .modal-content {
+    width: 95%;           /* almost full width */
+    max-width: none;
+    max-height: 90vh;     /* stay inside viewport */
+    overflow-y: auto;     /* scroll if too tall */
+    padding: 20px;
+    transform: scale(1);  /* remove desktop scaling */
+  }
+
+  .project-image img {
+    max-height: 250px;
+    object-fit: contain;
+  }
+
+  .close {
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
   }
 
   /* Experience section mobile */
@@ -1155,19 +1240,9 @@ section:hover .section-divider {
     flex-direction: column;
     gap: 0;
   }
-
-  /* Modal mobile adjustments */
-  .modal-content {
-    padding: 20px;
-    width: 95%;
-  }
-
-  .project-image img {
-    max-height: 250px;
-  }
 }
 
-/* Additional adjustments for very small screens */
+/* Very small screens adjustments */
 @media (max-width: 480px) {
   section {
     padding: 70px 15px 30px;

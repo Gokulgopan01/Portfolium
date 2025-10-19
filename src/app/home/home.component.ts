@@ -112,7 +112,7 @@ export class HomeComponent {
       desc: `A secure, full-stack platform for pet owners to manage and share pet details.
     Includes health record uploads, digital vaccination tracking, and QR-enabled keychains for lost-and-found identification.
     The platform emphasizes scalability, data security, and a smooth user experience.`,
-      link: 'https://github.com/Gokulgopan01',
+      link: 'https://github.com/Gokulgopan01/Pet-Safe',
       image: 'assets/images/pet_safe.png',
     },
     {
@@ -123,7 +123,7 @@ export class HomeComponent {
       desc: `A role-based task management dashboard for monitoring employee progress.
     Features include CRUD operations, task status analytics, and access control layers for admin, manager, and staff roles.
     Integrated notification system using SweetAlert and real-time updates.`,
-      link: 'https://github.com/Gokulgopan01',
+      link: 'https://github.com/Gokulgopan01/Work-Track',
       image: '/assets/images/Work_track.png',
     },
     {
@@ -133,7 +133,7 @@ export class HomeComponent {
       tech: 'Scikit-Learn, Pandas, Matplotlib, Django',
       desc: `A predictive analytics tool that leverages regression algorithms to forecast stock price movements.
     Includes automated data fetching, preprocessing, and visualization dashboards built with Django.`,
-      link: 'https://github.com/Gokulgopan01',
+      link: 'https://github.com/Gokulgopan01/Stock-AI',
     },
     {
       id: 'project4',

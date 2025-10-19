@@ -247,10 +247,11 @@
         <li [class.active]="currentIndex === 3" (click)="navigateToSection(3)"><i class="fas fa-project-diagram"></i> Projects</li>
         <li [class.active]="currentIndex === 4" (click)="navigateToSection(4)"><i class="fas fa-briefcase"></i> Experience</li>
         <li [class.active]="currentIndex === 5" (click)="navigateToSection(5)"><i class="fas fa-address-book"></i> Contact</li>
+        <div class="theme-toggle" (click)="toggleTheme()"> <i [class]="isDarkTheme ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"></i></div>
       </ul>
 
       <!-- Theme icon -->
-      <div class="theme-toggle" (click)="toggleTheme()"> <i [class]="isDarkTheme ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"></i></div>
+      
   </nav>
 </div>
 
