@@ -1,9 +1,8 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, AfterViewInit, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';   
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
-
 
 interface Project {
   id: string;
@@ -12,6 +11,7 @@ interface Project {
   title: string;
   desc: string;
   link: string;
+  visitLink?: string;
   image?: string;
 }
 
@@ -34,7 +34,6 @@ interface Experience {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   animations: [
-    // Fade in each section on enter
     trigger('fadeInSection', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(20px)' }),
@@ -42,7 +41,6 @@ interface Experience {
       ])
     ]),
     
-    // Staggered fade in for lists/items
     trigger('staggerFadeIn', [
       transition(':enter', [
         query(':self > *', [
@@ -55,14 +53,17 @@ interface Experience {
     ])
   ]
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit, OnInit {
+  // Track current visible section
+  currentSection: string = 'personal-photo';
+  
   sections = ['personal-photo', 'about', 'skills', 'projects', 'experience', 'contact'];
-
-  currentIndex = 0;
+  
   sending = false;
   isMobile: boolean = false;
   isDarkTheme = false;
 
+  // Your existing arrays (skills, experiences, projects) remain the same...
   skills: Skill[] = [
     { name: 'Python', level: 100 },
     { name: 'Django', level: 100 },
@@ -107,12 +108,13 @@ export class HomeComponent {
     {
       id: 'project1',
       category: 'Full-Stack Development',
-      title: 'Pet Safe (2025)',
+      title: 'Tail Cart (2025)',
       tech: 'Django, Angular, MySQL',
       desc: `A secure, full-stack platform for pet owners to manage and share pet details.
     Includes health record uploads, digital vaccination tracking, and QR-enabled keychains for lost-and-found identification.
     The platform emphasizes scalability, data security, and a smooth user experience.`,
       link: 'https://github.com/Gokulgopan01/Pet-Safe',
+      visitLink: 'https://tailcart.vercel.app/',
       image: 'assets/images/pet_safe.png',
     },
     {
@@ -124,6 +126,7 @@ export class HomeComponent {
     Features include CRUD operations, task status analytics, and access control layers for admin, manager, and staff roles.
     Integrated notification system using SweetAlert and real-time updates.`,
       link: 'https://github.com/Gokulgopan01/Work-Track',
+      visitLink: '',
       image: '/assets/images/Work_track.png',
     },
     {
@@ -134,6 +137,7 @@ export class HomeComponent {
       desc: `A predictive analytics tool that leverages regression algorithms to forecast stock price movements.
     Includes automated data fetching, preprocessing, and visualization dashboards built with Django.`,
       link: 'https://github.com/Gokulgopan01/Stock-AI',
+      visitLink: '',
     },
     {
       id: 'project4',
@@ -143,6 +147,7 @@ export class HomeComponent {
       desc: `An AI-integrated e-commerce system where users can generate custom outfit designs through text prompts.
     Includes product recommendation, order tracking, and secure online checkout modules.`,
       link: 'https://github.com/Gokulgopan01/Shopping_Cart',
+      visitLink: '',
       image: '/assets/images/Shop_cart.png',
     }
   ];
@@ -151,14 +156,8 @@ export class HomeComponent {
 
   constructor(private snackBar: MatSnackBar) {
     this.checkMobileView();
-  }
-
-  
-
-  @HostListener('window:resize', [])
-  onResize() {
-    this.checkMobileView();
-
+    
+    // Load saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
       this.isDarkTheme = true;
@@ -166,33 +165,96 @@ export class HomeComponent {
     }
   }
 
+  ngOnInit() {
+    // Initialize scroll tracking
+    this.setupScrollTracking();
+  }
+
+  ngAfterViewInit() {
+    this.initializeScrollAnimations();
+  }
+
+  setupScrollTracking() {
+    // Track which section is currently in view
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.currentSection = entry.target.id;
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-50% 0px -50% 0px', // Center of viewport
+        threshold: 0
+      }
+    );
+
+    // Observe all sections
+    this.sections.forEach(sectionId => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+  }
+
+  initializeScrollAnimations() {
+    // Set up intersection observer for scroll animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          
+          // Add specific animation classes based on data attributes
+          const animationType = entry.target.getAttribute('data-animate');
+          if (animationType) {
+            entry.target.classList.add(`animate-${animationType}`);
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with scroll-animate class
+    setTimeout(() => {
+      document.querySelectorAll('.scroll-animate').forEach(el => {
+        observer.observe(el);
+      });
+    }, 100);
+  }
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.checkMobileView();
+  }
+
   checkMobileView() {
-    this.isMobile = window.innerWidth <= 720;
+    this.isMobile = window.innerWidth <= 768;
   }
 
   toggleTheme() {
-  this.isDarkTheme = !this.isDarkTheme;
-
-  if (this.isDarkTheme) {
-    document.body.classList.add('dark-theme');
-    localStorage.setItem('theme', 'dark');
-  } else {
-    document.body.classList.remove('dark-theme');
-    localStorage.setItem('theme', 'light');
+    this.isDarkTheme = !this.isDarkTheme;
+    
+    if (this.isDarkTheme) {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+    }
   }
-}
 
   @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    // Only handle keyboard navigation if not on mobile
-    if (!this.isMobile) {
-      if (event.key === 'ArrowRight') {
-        this.scrollNext();
-      } else if (event.key === 'ArrowLeft') {
-        this.scrollPrev();
-      } else if (event.key === 'Escape' && this.selectedProject) {
-        this.closeProject();
-      }
+    if (event.key === 'Escape' && this.selectedProject) {
+      this.closeProject();
     }
   }
 
@@ -206,47 +268,22 @@ export class HomeComponent {
     document.body.style.overflow = 'auto';
   }
 
-  scrollNext(): void {
-    // Only scroll horizontally if not on mobile
-    if (!this.isMobile) {
-      if (this.currentIndex < this.sections.length - 1) {
-        this.currentIndex++;
-      } else {
-        this.currentIndex = 0;
-      }
-    }
-  }
-
-  scrollPrev(): void {
-    // Only scroll horizontally if not on mobile
-    if (!this.isMobile) {
-      if (this.currentIndex > 0) {
-        this.currentIndex--;
-      } else {
-        this.currentIndex = this.sections.length - 1;
-      }
-    }
-  }
-
-  // Navigation from navbar - only update currentIndex for active styling
-  navigateToSection(index: number) {
-    this.currentIndex = index;
-    
-    // If on mobile, scroll to the section
-    if (this.isMobile) {
-      const sectionId = this.sections[index];
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+  navigateToSection(sectionId: string) {
+    this.currentSection = sectionId;
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   }
 
   getSkillColor(level: number): string {
-    if (level >= 90) return '#a8e7a8'; 
-    if (level >= 80) return '#7ec8e3'; 
-    if (level >= 70) return '#ffd166'; 
-    return '#ff6b6b'; 
+    if (level >= 90) return '#10b981'; 
+    if (level >= 80) return '#3b82f6'; 
+    if (level >= 70) return '#f59e0b'; 
+    return '#ef4444'; 
   }
 
   submitForm() {
@@ -255,10 +292,10 @@ export class HomeComponent {
     setTimeout(() => {
       this.sending = false;
       this.snackBar.open('Message sent successfully to Gokul!', 'Close', {
-      duration: 5000,           
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-        });
+        duration: 5000,           
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
       
       const form = document.querySelector('form') as HTMLFormElement;
       if (form) {
