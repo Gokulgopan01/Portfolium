@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import lottie, { AnimationItem } from 'lottie-web';
 
 interface Project {
   id: string;
@@ -62,6 +63,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
   sending = false;
   isMobile: boolean = false;
   isDarkTheme = false;
+
+  private lottieAnimation: AnimationItem | null = null;
 
   // Your existing arrays (skills, experiences, projects) remain the same...
   skills: Skill[] = [
@@ -172,7 +175,25 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.initializeScrollAnimations();
+    this.initializeLottieAnimation();
   }
+
+  initializeLottieAnimation() {
+    // Wait for the DOM to be ready
+    setTimeout(() => {
+      const container = document.getElementById('lottie-container');
+      if (container) {
+        this.lottieAnimation = lottie.loadAnimation({
+          container: container,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: 'assets/hello animation.json'
+        });
+      }
+    }, 100);
+  }
+
 
   setupScrollTracking() {
     // Track which section is currently in view
