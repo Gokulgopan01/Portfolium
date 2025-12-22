@@ -1,17 +1,17 @@
-
 .portfolio-container {
-  width: 100%; /* Change from 600vw */
-  height: auto; /* Change from 100vh */
-  display: block; /* Change from flex */
+  width: 100%;
+  height: auto;
+  display: block;
   position: relative;
-  overflow-x: hidden !important; /* Change from auto to hidden */
-  overflow-y: visible !important; /* Change from hidden to visible */
+  overflow-x: hidden !important;
+  overflow-y: auto !important; /* Changed from visible to auto */
   background: linear-gradient(135deg, var(--bg-color) 0%, var(--card-color) 100%);
 }
 
 .sections-wrapper {
-  display: block; /* Change from flex */
-  width: 100%; /* Change from 600vw */
+  display: block;
+  width: 100%;
+  position: relative; /* Add this */
 }
 
 /* Each section takes full viewport */
@@ -668,6 +668,21 @@ section.active {
   opacity: 0.8;
   font-weight: 500;
 }
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto; /* Ensure vertical scroll */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+}
+.portfolio-container::-webkit-scrollbar {
+  display: none !important;
+}
+
+.portfolio-container {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
 /* ============================================
    MOBILE RESPONSIVE STYLES - Enhanced
    ============================================ */
@@ -713,6 +728,13 @@ section.active {
     height: auto !important;
     margin-bottom: 20px !important;
   }
+  html, body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
   
   .section-content {
     padding: 30px !important;
@@ -1266,6 +1288,7 @@ section.active {
   }
 }
 
+
 /* Fix for Android Chrome */
 @media (-webkit-device-pixel-ratio: 1.5) {
   .top-navbar {
@@ -1276,17 +1299,20 @@ section.active {
 
 /* Prevent horizontal scrolling on mobile */
 @media (max-width: 768px) {
-  html, body {
-    overflow-x: hidden !important;
-    max-width: 100% !important;
-  }
+  
   
   .portfolio-container {
-    overflow-x: hidden !important;
+    height: 100vh;
+    overflow-y: scroll !important;
+    -webkit-overflow-scrolling: touch;
   }
   
   .sections-wrapper {
-    overflow-x: hidden !important;
+    min-height: 100%;
+  }
+  section {
+    min-height: 100vh !important;
+    height: auto;
   }
 }
 
