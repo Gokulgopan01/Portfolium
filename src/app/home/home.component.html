@@ -1,306 +1,583 @@
-<div class="portfolio-container">
-  <div class="sections-wrapper">
-    
-    <!-- Home Section -->
-    <div class="home-container">
-      <section id="personal-photo" class="scroll-animate" data-animate="fade-scale">
-        <div class="section-content">
-          <div class="personal-photo-container">
-            <!-- Left: Text -->
-            <div class="personal-text">
-              <div id="lottie-container" class="lottie-container"></div>
+<div class="portfolio-container" [class.dark-theme]="isDarkTheme">
+  <!-- Particle Network Background -->
+  <canvas id="particleCanvas" class="particle-canvas"></canvas>
 
-              <h2 class="slide-in-left"><i class="fas fa-hand-wave"></i><b>I'm</b></h2>
-              <p class="name-animation">Gokul Gopan</p>
-              <p class="slide-in-right">
-                A results-driven Software Engineer specializing in full-stack development, 
-                Automation Scripting, API Creation and scalable systems.
-              </p>
-              <div class="mt-4">
-                <button class="btn btn-primary me-3" (click)="navigateToSection('contact')">
-                  <i class="fas fa-envelope me-2"></i>Contact Me
-                </button>
-                <a href="https://linkedin.com/in/gokul-gopan-022b95235" target="_blank" class="btn btn-outline-primary">
-                  <i class="fab fa-linkedin me-2"></i>LinkedIn
-                </a>
-              </div>
-            </div>
-
-            <!-- Right: Photo -->
-            <div class="personal-image">
-              <div class="image-container float-animation">
-                <div class="profile-img"></div>
-                <div class="image-overlay"></div>
-              </div>
-            </div>
-          </div>
-
-          <hr class="section-divider">
-          <div class="signature">
-            <span class="sign">Gokul</span>
-            <span class="designation"><i class="fas fa-briefcase"></i> Software Engineer, Ecesis Technologies</span>
-          </div>
-        </div>
-      </section>
+  <!-- Floating Tech Icons -->
+  <div class="floating-tech-icons">
+    <div class="floating-icon" style="--delay: 0s; --x: 10%; --y: 20%;">
+      <i class="fas fa-code"></i>
     </div>
-
-    <!-- About Section -->
-    <section id="about" class="scroll-animate" data-animate="slide-up">
-      <div class="section-content">
-        <h1 class="fade-in"><i class="fas fa-lightbulb"></i> Innovating, Automating & Building Scalable Software</h1>
-        <h2 class="slide-in-left"> Objective:</h2>
-        <p class="fade-in-delay">
-          I am a Software Engineer with over 3 years of experience designing, developing, and deploying efficient and scalable web applications. 
-          My technical expertise includes <strong> Python</strong>, <strong> Django</strong>, <strong> Angular</strong>, and <strong> FastAPI</strong>, 
-          complemented by proficiency in <strong> CI/CD pipelines (Jenkins)</strong>, <strong> cloud platforms (AWS, GCP)</strong>, and <strong> web scraping/crowling automation</strong>. 
-          I aim to leverage my problem-solving and system design skills to deliver impactful digital solutions that enhance productivity and user experience.
-        </p>
-
-        <hr class="section-divider">
-
-        <div class="about-info">
-          <h2 class="slide-in-right"> About Me:</h2>
-          <div class="info-grid">
-            <div class="info-item fade-in-stagger">
-              <p><i class="fas fa-user"></i> <strong>Name</strong>: Gokul Gopan</p>
-            </div>
-            <div class="info-item fade-in-stagger">
-              <p><i class="fas fa-briefcase"></i> <strong>Occupation</strong>: Software Engineer</p>
-            </div>
-            <div class="info-item fade-in-stagger">
-              <p><i class="fas fa-map-marker-alt"></i> <strong>Place</strong>: Thiruvananthapuram, Kerala</p>
-            </div>
-            <div class="info-item fade-in-stagger">
-              <p><i class="fas fa-phone"></i> <strong>Phone</strong>: +91 9072239489</p>
-            </div>
-            <div class="info-item fade-in-stagger">
-              <p><i class="fab fa-linkedin"></i> <strong>LinkedIn</strong>: 
-                <a href="https://linkedin.com/in/gokul-gopan-022b95235" target="_blank">linkedin.com/in/gokul-gopan-022b95235</a>
-              </p>
-            </div>
-            <div class="info-item fade-in-stagger">
-              <p><i class="fab fa-github"></i> <strong>GitHub</strong>: 
-                <a href="https://github.com/Gokulgopan01" target="_blank">github.com/Gokulgopan01</a>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <hr class="section-divider">
-        <div class="signature">
-          <span class="sign">Gokul</span>
-          <span class="designation"><i class="fas fa-briefcase"></i> Software Engineer, Ecesis Technologies</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="scroll-animate" data-animate="slide-left">
-      <div class="section-content">
-        <h2 class="bounce-in"><i class="fas fa-tools"></i> Technical Skills</h2>
-        
-        <div class="skills-grid">
-          <div class="skill-circle" *ngFor="let skill of skills; let i = index" 
-               [style.--animation-order]="i">
-            <div class="circle-container">
-              <div class="circular-progress" 
-                  [style.--progress]="skill.level/100"
-                  [style.--color]="getSkillColor(skill.level)">
-                <div class="progress-value">
-                  {{ skill.level }}%
-                </div>
-              </div>
-            </div>
-            <span class="skill-name">
-              <i *ngIf="skill.name === 'Python'" class="fab fa-python"></i>
-              <i *ngIf="skill.name === 'Django'" class="fas fa-server"></i>
-              <i *ngIf="skill.name === 'Angular'" class="fab fa-angular"></i>
-              <i *ngIf="skill.name === 'FastAPI'" class="fas fa-bolt"></i>
-              <i *ngIf="skill.name === 'JavaScript/TypeScript'" class="fab fa-js"></i>
-              <i *ngIf="skill.name === 'MySQL' || skill.name === 'PostgreSQL'" class="fas fa-database"></i>
-              <i *ngIf="skill.name === 'Machine Learning'" class="fas fa-robot"></i>
-              <i *ngIf="skill.name === 'Git'" class="fab fa-git-alt"></i>
-              <i *ngIf="skill.name === 'Jenkins'" class="fab fa-jenkins"></i>
-              <i *ngIf="skill.name === 'AWS'" class="fab fa-aws"></i>
-              <i *ngIf="skill.name === 'GCP'" class="fab fa-google"></i>
-              {{ skill.name }}
-            </span>
-          </div>
-        </div>
-
-        <hr class="section-divider">
-        <div class="signature">
-          <span class="sign">Gokul</span>
-          <span class="designation"><i class="fas fa-briefcase"></i> Software Engineer, Ecesis Technologies</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="scroll-animate" data-animate="slide-right">
-      <div class="section-content">
-        <h2 class="zoom-in"><i class="fas fa-project-diagram"></i> My Recent Works</h2>
-        <div class="project" *ngFor="let project of projects; let i = index" 
-             [style.--project-index]="i">
-          <span class="category"><i class="fas fa-tag"></i> {{ project.category }}</span>
-          
-          <h2><i class="fas fa-folder-open"></i> {{ project.title }}</h2>
-          <h5 class="tech-used"><i class="fas fa-code"></i> Tech Used: {{ project.tech }}</h5>
-          <button class="expand-btn" (click)="openProject(project)">
-            <i class="fas fa-eye"></i>
-          </button>
-        </div>
-
-        <hr class="section-divider">
-        <div class="signature">
-          <span class="sign">Gokul</span>
-          <span class="designation"><i class="fas fa-briefcase"></i> Software Engineer, Ecesis Technologies</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="scroll-animate" data-animate="fade-scale">
-      <div class="section-content">
-        <h1 class="slide-in-left"><i class="fas fa-history"></i> Professional Experience</h1>
-        
-        <div class="experience-item" *ngFor="let exp of experiences; let i = index">
-          <div class="exp-header">
-            <h2><i class="fas fa-briefcase"></i> <strong>{{ exp.position }}</strong></h2>
-            <span class="exp-period"><i class="fas fa-calendar-alt"></i> {{ exp.period }}</span>
-          </div>
-          <h3><i class="fas fa-building"></i> {{ exp.company }}</h3>
-          <p><i class="fas fa-info-circle"></i> {{ exp.description }}</p>
-          <hr class="section-divider">
-        </div>
-        
-        <div class="signature">
-          <span class="sign">Gokul</span>
-          <span class="designation"><i class="fas fa-briefcase"></i> Software Engineer, Ecesis Technologies</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="scroll-animate" data-animate="bounce-in">
-      <div class="section-content">
-        <div class="contact-info">
-          <div class="contact-details">
-            <h2 class="fade-in"><i class="fas fa-address-book"></i> Contact Me</h2>
-            <div class="contact-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <p><strong>Location:</strong> Thiruvanathapuram, Kerala, India</p>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-phone"></i>
-              <p><strong>Phone:</strong> +91 9072239489</p>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-envelope"></i>
-              <p><strong>Email:</strong> 
-                <a href="mailto:gokulmittu01@gmail.com">gokulmittu01&#64;gmail.com</a>
-              </p>
-            </div>
-            <div class="contact-item">
-              <i class="fab fa-linkedin"></i>
-              <p>
-                <strong>LinkedIn:</strong>
-                <a href="https://linkedin.com/in/gokul-gopan-022b95235" target="_blank">
-                  gokul-gopan-022b95235
-                </a>
-              </p>
-            </div>
-            <div class="contact-item">
-              <i class="fab fa-github"></i>
-              <p>
-                <strong>GitHub:</strong>
-                <a href="https://github.com/Gokulgopan01" target="_blank">Gokulgopan01</a>
-              </p>
-            </div>
-          </div>
-          
-          <div class="contact-form">
-            <h2 class="fade-in"><i class="fas fa-paper-plane"></i> Let's Start A New Project</h2>
-            <form (ngSubmit)="submitForm()" #contactForm="ngForm">
-              <div class="form-group">
-                <input type="text" placeholder="Your Name" name="name" ngModel required class="form-control mb-3" />
-                <input type="email" placeholder="Your Email" name="email" ngModel required class="form-control mb-3" />
-              </div>
-              <div class="form-group">
-                <input type="tel" placeholder="Your Phone" name="phone" ngModel required class="form-control mb-3" />
-                <input type="text" placeholder="Your Subject" name="subject" ngModel required class="form-control mb-3" />
-              </div>
-              <textarea placeholder="Start writing your message here" name="message" ngModel required class="form-control mb-4"></textarea>
-              <button type="submit" class="btn btn-primary w-100" [class.btn-loading]="sending">
-                <span *ngIf="!sending"><i class="fas fa-paper-plane me-2"></i>Send Message</span>
-                <span *ngIf="sending"><i class="fas fa-spinner fa-spin me-2"></i>Sending...</span>
-              </button>
-            </form>
-          </div>
-        </div>
-        <hr class="section-divider">
-        <div class="signature">
-          <span class="sign">Gokul</span>
-          <span class="designation"><i class="fas fa-briefcase"></i> Software Engineer, Ecesis Technologies</span>
-        </div>
-      </div>
-    </section>
+    <div class="floating-icon" style="--delay: 1s; --x: 20%; --y: 60%;">
+      <i class="fas fa-palette"></i>
+    </div>
+    <div class="floating-icon" style="--delay: 2s; --x: 80%; --y: 30%;">
+      <i class="fas fa-database"></i>
+    </div>
+    <div class="floating-icon" style="--delay: 3s; --x: 70%; --y: 70%;">
+      <i class="fas fa-server"></i>
+    </div>
+    <div class="floating-icon" style="--delay: 4s; --x: 40%; --y: 40%;">
+      <i class="fas fa-mobile-alt"></i>
+    </div>
+    <div class="floating-icon" style="--delay: 5s; --x: 90%; --y: 80%;">
+      <i class="fas fa-cloud"></i>
+    </div>
   </div>
 
-  <!-- Navigation Bar -->
-  <!-- Navigation Bar -->
-<nav class="top-navbar">
-  <ul>
-    <li [class.active]="currentSection === 'personal-photo'" (click)="navigateToSection('personal-photo')">
-      <i class="fas fa-home"></i><span>Home</span>
-    </li>
-    <li [class.active]="currentSection === 'about'" (click)="navigateToSection('about')">
-      <i class="fas fa-user"></i><span>About</span>
-    </li>
-    <li [class.active]="currentSection === 'skills'" (click)="navigateToSection('skills')">
-      <i class="fas fa-tools"></i><span>Skills</span>
-    </li>
-    <li [class.active]="currentSection === 'projects'" (click)="navigateToSection('projects')">
-      <i class="fas fa-project-diagram"></i><span>Projects</span>
-    </li>
-    <li [class.active]="currentSection === 'experience'" (click)="navigateToSection('experience')">
-      <i class="fas fa-briefcase"></i><span>Experience</span>
-    </li>
-    <li [class.active]="currentSection === 'contact'" (click)="navigateToSection('contact')">
-      <i class="fas fa-address-book"></i><span>Contact</span>
-    </li>
-    <li class="theme-toggle" (click)="toggleTheme()">
-      <i [class]="isDarkTheme ? 'fas fa-sun' : 'fas fa-moon'"></i>
-    </li>
-  </ul>
-</nav>
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+  <div class="cursor-trail"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <!-- Center navigation links -->
+      <div class="navbar-center">
+        <div class="navbar-links">
+          <a href="#" (click)="navigateToSection('personal-photo'); $event.preventDefault()" 
+             [class.active]="currentSection === 'personal-photo'">Home</a>
+          <a href="#" (click)="navigateToSection('about'); $event.preventDefault()" 
+             [class.active]="currentSection === 'about'">About</a>
+          <a href="#" (click)="navigateToSection('projects'); $event.preventDefault()" 
+             [class.active]="currentSection === 'projects'">Projects</a>
+          <a href="#" (click)="navigateToSection('experience'); $event.preventDefault()" 
+             [class.active]="currentSection === 'experience'">Experience</a>
+          <a href="#" (click)="navigateToSection('contact'); $event.preventDefault()" 
+             [class.active]="currentSection === 'contact'">Contact</a>
+        </div>
+      </div>
+      
+      <!-- Right side actions -->
+      <div class="navbar-right">
+        <div class="navbar-actions">
+          <!-- Theme toggle for desktop -->
+          <button class="theme-toggle desktop-only" (click)="toggleTheme()">
+            <i [class]="isDarkTheme ? 'fas fa-sun' : 'fas fa-moon'"></i>
+          </button>
+          
+          <!-- Download Resume button -->
+          <a href="assets/Gokulresume.pdf" download class="btn-download-resume magnetic-button">
+            Resume<i class="fas fa-download"></i>
+          </a>
+          
+          <!-- Mobile menu toggle -->
+          <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" [class.active]="isMobileMenuOpen">
+      <div class="mobile-menu-header">
+        <button class="mobile-menu-close" (click)="closeMobileMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="mobile-menu-links">
+        <a href="#" (click)="navigateToSection('personal-photo'); closeMobileMenu(); $event.preventDefault()" 
+           [class.active]="currentSection === 'personal-photo'">
+          <i class="fas fa-home"></i>Home
+        </a>
+        <a href="#" (click)="navigateToSection('about'); closeMobileMenu(); $event.preventDefault()" 
+           [class.active]="currentSection === 'about'">
+          <i class="fas fa-user"></i>About
+        </a>
+        <a href="#" (click)="navigateToSection('projects'); closeMobileMenu(); $event.preventDefault()" 
+           [class.active]="currentSection === 'projects'">
+          <i class="fas fa-project-diagram"></i>Projects
+        </a>
+        <a href="#" (click)="navigateToSection('experience'); closeMobileMenu(); $event.preventDefault()" 
+           [class.active]="currentSection === 'experience'">
+          <i class="fas fa-briefcase"></i>Experience
+        </a>
+        <a href="#" (click)="navigateToSection('contact'); closeMobileMenu(); $event.preventDefault()" 
+           [class.active]="currentSection === 'contact'">
+          <i class="fas fa-address-book"></i>Contact
+        </a>
+      </div>
+      
+      <div class="mobile-menu-actions">
+        <button class="theme-toggle mobile-theme-toggle" (click)="toggleTheme()">
+          <i [class]="isDarkTheme ? 'fas fa-sun' : 'fas fa-moon'"></i>
+          <span>{{ isDarkTheme ? 'Light Mode' : 'Dark Mode' }}</span>
+        </button>
+        
+        <a href="assets/Gokulresume.pdf" download class="btn-download-resume-mobile">
+          Resume<i class="fas fa-download"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section id="personal-photo" class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <!-- Open to opportunities -->
+      <div class="hero-status">
+        <span class="status-dot"></span>
+        <span class="status-text">Open to opportunities</span>
+        <!-- Lottie animation goes HERE, after the text -->
+        <div #lottieContainer class="lottie-hello"></div>
+      </div>
+      
+      <!-- Your Name -->
+      <h1 class="hero-title">
+        Gokul Gopan
+      </h1>
+        
+        <p class="hero-description">
+          Building beautiful, performant, and user-centric digital experiences that make a difference.
+        </p>
+        
+        <div class="hero-social-links">
+          <a href="https://github.com/Gokulgopan01" target="_blank" class="social-link" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/gokul-gopan-022b95235" target="_blank" class="social-link" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=gokulmittu01@gmail.com"
+              class="social-link"
+              title="Email"
+              target="_blank"
+              rel="noopener">
+              <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        
+        <div class="hero-actions">
+          <button class="btn-primary magnetic-button" (click)="navigateToSection('contact')">
+            <i class="fas fa-envelope me-2"></i>Contact Me
+          </button>
+          <a href="assets/Gokulresume.pdf" download class="btn-outline">
+            <i class="fas fa-download me-2"></i>Download Resume
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">ABOUT ME</h2>
+        <h3 class="section-subtitle">Crafting Software Excellence</h3>
+      </div>
+      
+      <div class="about-grid">
+        <!-- Left Column: Description & Highlights -->
+        <div class="about-left">
+          <div class="about-content">
+            <p class="about-description">
+              I'm a passionate Full Stack Developer with 3+ years of experience building web applications that users love. 
+              I specialize in creating seamless digital experiences that combine beautiful design with robust functionality.
+            </p>
+            
+            <p class="about-description">
+              When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, 
+              or sharing knowledge through blog posts and mentoring.
+            </p>
+          </div>
+          
+          <!-- Horizontal Rule -->
+          <div class="section-divider"></div>
+          
+          <!-- Interactive Code Block -->
+        <div class="code-block-container">
+          <div class="code-block">
+
+            <!-- Header -->
+            <div class="code-header">
+              <div class="code-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+
+              <div class="code-tabs">
+                <button class="code-tab active" data-tab="python">Python</button>
+                <button class="code-tab" data-tab="typescript">TypeScript</button>
+                <button class="code-tab" data-tab="sql">SQL</button>
+              </div>
+            </div>
+
+            <!-- Code Content -->
+            <div class="code-content">
+              <pre class="language-python active"><code>
+        def build_amazing_app():
+            print("Initializing application...")
+            print("✓ Database connected")
+            print("✓ API running")
+            print("🎉 Ready")
+              </code></pre>
+
+              <pre class="language-typescript"><code>
+        console.log("Compiling TypeScript...");
+        console.log("✓ Modules loaded");
+        console.log("✓ Build success");
+              </code></pre>
+
+              <pre class="language-sql"><code>
+        SELECT 'Connecting DB...';
+        SELECT '✓ Tables ready';
+        SELECT '✓ Query executed';
+              </code></pre>
+            </div>
+
+            <!-- Output (hidden initially) -->
+            <div class="code-output hidden">
+              <div class="output-header">Output</div>
+              <div class="output-content"></div>
+            </div>
+
+            <button class="btn-run-code">
+              <i class="fas fa-play"></i> Run Code
+            </button>
+
+          </div>
+        </div>
+                        
+          <!-- Horizontal Rule -->
+          <div class="section-divider"></div>
+          
+          <!-- Highlights -->
+          <div class="highlights-section">
+            <div class="highlights-grid">
+              <div class="highlight-item">
+                <h4 class="highlight-title">Clean Code</h4>
+                <p class="highlight-description">Writing maintainable, scalable solutions</p>
+              </div>
+              
+              <div class="highlight-item">
+                <h4 class="highlight-title">Design Focused</h4>
+                <p class="highlight-description">Pixel-perfect implementations</p>
+              </div>
+              
+              <div class="highlight-item">
+                <h4 class="highlight-title">Performance</h4>
+                <p class="highlight-description">Optimized for speed and efficiency</p>
+              </div>
+              
+              <div class="highlight-item">
+                <h4 class="highlight-title">Innovation</h4>
+                <p class="highlight-description">Always learning new technologies</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column: Skills & Stats -->
+        <div class="about-right">
+          <!-- Skills Section -->
+          <div class="skills-section">
+            <div class="skills-category">
+              <h4 class="skills-category-title">FRONTEND</h4>
+              <div class="skills-buttons">
+                <span class="skill-button">Angular</span>
+                <span class="skill-button">TypeScript</span>
+                <span class="skill-button">Javascript</span>
+                <span class="skill-button">Bootstrap</span>
+                <span class="skill-button">Ajax</span>
+              </div>
+            </div>
+            
+            <div class="skills-category">
+              <h4 class="skills-category-title">BACKEND</h4>
+              <div class="skills-buttons">
+                <span class="skill-button">Python</span>
+                <span class="skill-button">Django</span>
+                <span class="skill-button">FastAPI</span>
+                <span class="skill-button">C++</span>
+                <span class="skill-button">MySQL</span>
+              </div>
+            </div>
+            
+            <div class="skills-category">
+              <h4 class="skills-category-title">TOOLS</h4>
+              <div class="skills-buttons">
+                <span class="skill-button">Git</span>
+                <span class="skill-button">Docker</span>
+                <span class="skill-button">AWS</span>
+                <span class="skill-button">Jenkins</span>
+                <span class="skill-button">VS Code</span>
+              </div>
+            </div>
+
+            <div class="skills-category">
+              <h4 class="skills-category-title">DATA & ML</h4>
+              <div class="skills-buttons">
+                <span class="skill-button">Scikit-Learn</span>
+                <span class="skill-button">Matplotlib</span>
+                <span class="skill-button">Pandas</span>
+                <span class="skill-button">Selenium</span>
+                <span class="skill-button">BeautifulSoup</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Horizontal Rule -->
+          <div class="section-divider"></div>
+          
+          <!-- Stats Section -->
+          <div class="stats-section">
+            <div class="stats-grid">
+              <div class="stat-item">
+                <h3 class="stat-number">3+</h3>
+                <p class="stat-label">Years Experience</p>
+              </div>
+              
+              <div class="stat-item">
+                <h3 class="stat-number">8+</h3>
+                <p class="stat-label">Projects Completed</p>
+              </div>
+              
+              <div class="stat-item">
+                <h3 class="stat-number">2+</h3>
+                <p class="stat-label">Happy Clients</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">PORTFOLIO</h2>
+        <h3 class="section-subtitle">Featured Projects</h3>
+        <p class="section-description">
+          A selection of my recent work. Each project is crafted with attention to detail and modern best practices.
+        </p>
+      </div>
+      
+      <div class="projects-grid">
+        <div class="project-card" *ngFor="let project of projects; let i = index">
+          <!-- Project Image with Hover Overlay -->
+          <div class="project-image-container">
+            <img [src]="project.image || 'assets/Profile_pic.jpg'" 
+                 [alt]="project.title" 
+                 class="project-image">
+            
+            <!-- Hover Overlay with Icons -->
+            <div class="project-overlay">
+              <a [href]="project.link" target="_blank" class="overlay-icon">
+                <i class="fab fa-github"></i>
+              </a>
+              <a [href]="project.visitLink || '#'" 
+                 target="_blank" 
+                 class="overlay-icon"
+                 [class.disabled]="!project.visitLink">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+              <button class="overlay-icon" (click)="openImage(project.image)">
+  <i class="fas fa-eye"></i>
+</button>
+            </div>
+          </div>
+          
+          <!-- Project Tech Tags -->
+          <div class="project-tech-tags">
+            <span class="tech-tag" *ngFor="let tag of getTechTags(project.tech)">{{ tag }}</span>
+          </div>
+          
+          <!-- Project Content -->
+          <div class="project-content">
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-description">{{ project.desc }}</p>
+            
+            <!-- Project Actions -->
+            <div class="project-actions">
+              <a [href]="project.link" target="_blank" class="btn-source-code magnetic-button">
+                <i class="fab fa-github me-2"></i>Source Code
+              </a>
+              <a [href]="project.visitLink || '#'" 
+                 target="_blank" 
+                 class="btn-visit-site magnetic-button"
+                 [class.disabled]="!project.visitLink">
+                <i class="fas fa-external-link-alt me-2"></i>Visit Site
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="experience-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">JOURNEY</h2>
+        <h3 class="section-subtitle">Experience & Education</h3>
+      </div>
+      
+      <div class="experience-timeline">
+        <!-- Center Line -->
+        <div class="timeline-line"></div>
+        
+        <!-- Timeline Items -->
+        <div class="timeline-items">
+          <div class="timeline-item" *ngFor="let exp of experiences; let i = index" 
+               [class.timeline-item-left]="i % 2 === 0" 
+               [class.timeline-item-right]="i % 2 !== 0">
+            <div class="timeline-dot"></div>
+            
+            <div class="timeline-content">
+              <div class="timeline-period">{{ exp.period }}</div>
+              <h3 class="timeline-title">{{ exp.position }}</h3>
+              <h4 class="timeline-company">{{ exp.company }}</h4>
+              <p class="timeline-description">{{ exp.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">GET IN TOUCH</h2>
+        <h3 class="section-subtitle">Let's Work Together</h3>
+        <p class="section-description">
+          Have a project in mind? I'd love to hear about it. Send me a message and let's create something amazing.
+        </p>
+      </div>
+      
+      <div class="contact-grid">
+        <!-- Left Column: Contact Information -->
+        <div class="contact-info">
+          <h4 class="contact-info-title">Contact Information</h4>
+          <p class="contact-info-note">
+            Feel free to reach out through any of these channels. I typically respond within 24 hours.
+          </p>
+          
+          <div class="contact-details">
+            <div class="contact-detail-item">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <h5 class="contact-label">Email</h5>
+                <p class="contact-value">gokulmittu01&#64;gmail.com</p>
+              </div>
+            </div>
+            
+            <div class="contact-detail-item">
+              <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div>
+                <h5 class="contact-label">Phone</h5>
+                <p class="contact-value">+91 9072239489</p>
+              </div>
+            </div>
+            
+            <div class="contact-detail-item">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <h5 class="contact-label">Location</h5>
+                <p class="contact-value">Thiruvananthapuram, Kerala</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column: Contact Form -->
+        <div class="contact-form-container">
+          <form (ngSubmit)="submitForm()" #contactForm="ngForm" class="contact-form">
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input type="text" 
+                     placeholder="Enter your name" 
+                     name="name" 
+                     ngModel required 
+                     class="form-input" />
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Your Email</label>
+              <input type="email" 
+                     placeholder="gokul@example.com" 
+                     name="email" 
+                     ngModel required 
+                     class="form-input" />
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Message</label>
+              <textarea placeholder="Tell me about your project..." 
+                       name="message" 
+                       ngModel required 
+                       class="form-textarea" 
+                       rows="6"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-submit magnetic-button" [class.loading]="sending">
+              <span *ngIf="!sending">Send Message</span>
+              <span *ngIf="sending">Sending...</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-right">
+          <p class="footer-text">
+            &copy; 2025 Gokul Gopan. All rights reserved. Made with <i class="fas fa-heart"></i>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Modal -->
+  <div class="project-modal" *ngIf="selectedProject" [class.show]="selectedProject">
+    <div class="modal-content">
+      <span class="close" (click)="closeProject()">&times;</span>
+      <h2><i class="fas fa-folder-open"></i> {{ selectedProject.title }}</h2>
+      
+      <div class="project-image" *ngIf="selectedProject.image">
+        <img [src]="selectedProject.image || 'assets/Profile_pic.jpg'" alt="{{ selectedProject.title }}" class="img-fluid">
+      </div>
+      
+      <p class="mt-4"><i class="fas fa-info-circle"></i> {{ selectedProject.desc }}</p>
+      
+      <div class="modal-tech">
+        <strong><i class="fas fa-code"></i> Technologies:</strong> {{ selectedProject.tech }}
+      </div>
+      
+      <div class="modal-buttons">
+        <a [href]="selectedProject.link" target="_blank" class="btn btn-dark me-2">
+          <i class="fab fa-github me-2"></i>View on GitHub
+        </a>
+        <a [href]="selectedProject.visitLink || '#'" target="_blank" class="visit-btn" *ngIf="selectedProject.visitLink">
+          <i class="fas fa-external-link-alt me-2"></i>Visit Site
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- Project Modal with Visit Site Button -->
-<div class="project-modal" *ngIf="selectedProject" [class.show]="selectedProject">
-  <div class="modal-content">
-    <span class="close" (click)="closeProject()">&times;</span>
-    <h2><i class="fas fa-folder-open"></i> {{ selectedProject.title }}</h2>
-    
-    <!-- Project Image -->
-    <div class="project-image" *ngIf="selectedProject.image">
-      <img [src]="selectedProject.image || 'assets/Profile_pic.jpg'" alt="{{ selectedProject.title }}" class="img-fluid">
-    </div>
-    
-    <p class="mt-4"><i class="fas fa-info-circle"></i> {{ selectedProject.desc }}</p>
-    
-    <div class="modal-tech">
-      <strong><i class="fas fa-code"></i> Technologies:</strong> {{ selectedProject.tech }}
-    </div>
-    
-    <div class="modal-buttons">
-      <a [href]="selectedProject.link" target="_blank" class="btn btn-dark me-2">
-        <i class="fab fa-github me-2"></i>View on GitHub
-      </a>
-      <!-- VISIT SITE BUTTON - Added as requested -->
-      <a [href]="selectedProject.visitLink || '#'" target="_blank" class="visit-btn" *ngIf="selectedProject.visitLink">
-        <i class="fas fa-external-link-alt me-2"></i>Visit Site
-      </a>
-    </div>
+<div class="image-modal" *ngIf="previewImage" (click)="closeImage()">
+  <div class="image-modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeImage()">×</button>
+    <img [src]="previewImage" alt="Preview" />
   </div>
 </div>
