@@ -2248,22 +2248,7 @@ section, div {
   height: auto !important;
 }
 
-.portfolio-container {
-  position: static;
-  overflow-x: hidden;
-  width: 100%;
-  height: auto;
-  min-height: 100vh;
-}
-.hero-section,
-.about-section,
-.projects-section,
-.experience-section,
-.contact-section {
-  overflow: visible !important;
-  height: auto !important;
-  min-height: auto !important;
-}
+
 
 html {
   overflow-x: hidden;
@@ -2291,25 +2276,8 @@ body {
   width: 100%;
 }
 
-/* 2. FIX PORTFOLIO CONTAINER */
-.portfolio-container {
-  position: static;
-  overflow-x: hidden;
-  width: 100%;
-  height: auto;
-  min-height: 100vh;
-}
 
-/* 3. UNLOCK ALL SECTIONS FOR SCROLLING */
-.hero-section,
-.about-section,
-.projects-section,
-.experience-section,
-.contact-section {
-  overflow: visible !important;
-  height: auto !important;
-  min-height: auto !important;
-}
+
 
 /* 6. EMERGENCY OVERRIDE - IF STILL NOT SCROLLING */
 .scroll-fix-override {
@@ -2319,34 +2287,55 @@ body {
   transform: none !important;
 }
 
+@media (max-width: 768px) {
+  html, body {
+    position: static !important;
+    overflow-y: auto !important;
+    touch-action: pan-y; /* Allows vertical touch scrolling */
+  }
+  
+  .portfolio-container {
+    position: static;
+    overflow: visible;
+    height: auto;
+  }
+  
+  /* Remove any transform that might interfere */
+  * {
+    transform: none !important;
+  }
+}
 
-/* MOBILE SCROLL FIX */
+
 html, body {
   overflow-x: hidden;
   overflow-y: auto;
   height: auto;
   min-height: 100vh;
-  position: relative;
   width: 100%;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 
 .portfolio-container {
-  overflow: visible;
-  height: auto;
   position: relative;
+  width: 100%;
+  height: auto;
+  overflow-x: hidden;
 }
 
-@media (max-width: 768px) {
-  html, body {
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  body {
-    position: static;
-  }
-  
-  .portfolio-container {
-    overflow: visible;
-  }
+section {
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+.hero-section,
+.about-section,
+.projects-section,
+.experience-section,
+.contact-section {
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
 }

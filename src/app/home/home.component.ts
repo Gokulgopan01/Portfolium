@@ -601,28 +601,17 @@ export class HomeComponent implements AfterViewInit, OnInit {
     }
   }
 
-  @HostListener('touchmove', ['$event'])
-  onTouchMove(event: TouchEvent) {
-    event.preventDefault();
-    if (event.touches.length > 0) {
-      const touch = event.touches[0];
-      // Set mouse position to touch position - this will trigger particle dispersal
-      this.mousePosition.x = touch.clientX;
-      this.mousePosition.y = touch.clientY;
-    }
-  }
+  
   
   @HostListener('touchstart', ['$event'])
-  onTouchStart(event: TouchEvent) {
-    if (event.touches.length > 0) {
-      const touch = event.touches[0];
-      this.mousePosition.x = touch.clientX;
-      this.mousePosition.y = touch.clientY;
-      
-      // Trigger particle interaction on touch start
-      this.updateParticlesOnTouch();
-    }
+onTouchStart(event: TouchEvent) {
+  if (event.touches.length > 0) {
+    const touch = event.touches[0];
+    this.mousePosition.x = touch.clientX;
+    this.mousePosition.y = touch.clientY;
+    this.updateParticlesOnTouch();
   }
+}
 
   // Update particles based on touch position
   updateParticlesOnTouch() {
