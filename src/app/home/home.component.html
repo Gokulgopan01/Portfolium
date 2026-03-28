@@ -1,52 +1,30 @@
 <div class="portfolio-container" [class.dark-theme]="isDarkTheme">
   <!-- Particle Network Background -->
   <canvas id="particleCanvas" class="particle-canvas"></canvas>
-
-  <!-- Floating Tech Icons -->
-  <div class="floating-tech-icons">
-    <div class="floating-icon" style="--delay: 0s; --x: 10%; --y: 20%;">
-      <i class="fas fa-code"></i>
-    </div>
-    <div class="floating-icon" style="--delay: 1s; --x: 20%; --y: 60%;">
-      <i class="fas fa-palette"></i>
-    </div>
-    <div class="floating-icon" style="--delay: 2s; --x: 80%; --y: 30%;">
-      <i class="fas fa-database"></i>
-    </div>
-    <div class="floating-icon" style="--delay: 3s; --x: 70%; --y: 70%;">
-      <i class="fas fa-server"></i>
-    </div>
-    <div class="floating-icon" style="--delay: 4s; --x: 40%; --y: 40%;">
-      <i class="fas fa-mobile-alt"></i>
-    </div>
-    <div class="floating-icon" style="--delay: 5s; --x: 90%; --y: 80%;">
-      <i class="fas fa-cloud"></i>
-    </div>
-  </div>
-
-  <!-- Custom Cursor -->
-  <div class="custom-cursor"></div>
-  <div class="cursor-trail"></div>
-
   <!-- Navbar -->
-  <nav class="navbar">
+  <nav class="navbar" [class.navbar-scrolled]="isScrolled">
     <div class="navbar-container">
+      <!-- Logo on left -->
+      <div class="navbar-logo">
+        <a (click)="navigateToSection('hero'); $event.preventDefault()" class="logo-text">Gokul Gopan</a>
+      </div>
+
       <!-- Center navigation links -->
       <div class="navbar-center">
         <div class="navbar-links">
-          <a href="#" (click)="navigateToSection('personal-photo'); $event.preventDefault()" 
-             [class.active]="currentSection === 'personal-photo'">Home</a>
-          <a href="#" (click)="navigateToSection('about'); $event.preventDefault()" 
-             [class.active]="currentSection === 'about'">About</a>
-          <a href="#" (click)="navigateToSection('projects'); $event.preventDefault()" 
-             [class.active]="currentSection === 'projects'">Projects</a>
-          <a href="#" (click)="navigateToSection('experience'); $event.preventDefault()" 
-             [class.active]="currentSection === 'experience'">Experience</a>
-          <a href="#" (click)="navigateToSection('contact'); $event.preventDefault()" 
-             [class.active]="currentSection === 'contact'">Contact</a>
+          <a href="#" (click)="navigateToSection('hero'); $event.preventDefault()"
+            [class.active]="currentSection === 'hero'">Home</a>
+          <a href="#" (click)="navigateToSection('about'); $event.preventDefault()"
+            [class.active]="currentSection === 'about'">About</a>
+          <a href="#" (click)="navigateToSection('projects'); $event.preventDefault()"
+            [class.active]="currentSection === 'projects'">Projects</a>
+          <a href="#" (click)="navigateToSection('experience'); $event.preventDefault()"
+            [class.active]="currentSection === 'experience'">Experience</a>
+          <a href="#" (click)="navigateToSection('contact'); $event.preventDefault()"
+            [class.active]="currentSection === 'contact'">Contact</a>
         </div>
       </div>
-      
+
       <!-- Right side actions -->
       <div class="navbar-right">
         <div class="navbar-actions">
@@ -54,12 +32,12 @@
           <button class="theme-toggle desktop-only" (click)="toggleTheme()">
             <i [class]="isDarkTheme ? 'fas fa-sun' : 'fas fa-moon'"></i>
           </button>
-          
+
           <!-- Download Resume button -->
           <a href="assets/Gokulresume.pdf" download class="btn-download-resume magnetic-button">
             Resume<i class="fas fa-download"></i>
           </a>
-          
+
           <!-- Mobile menu toggle -->
           <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
             <i class="fas fa-bars"></i>
@@ -67,7 +45,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Mobile Menu -->
     <div class="mobile-menu" [class.active]="isMobileMenuOpen">
       <div class="mobile-menu-header">
@@ -75,64 +53,86 @@
           <i class="fas fa-times"></i>
         </button>
       </div>
-      
+
       <div class="mobile-menu-links">
-        <a href="#" (click)="navigateToSection('personal-photo'); closeMobileMenu(); $event.preventDefault()" 
-           [class.active]="currentSection === 'personal-photo'">
+        <a href="#" (click)="navigateToSection('personal-photo'); closeMobileMenu(); $event.preventDefault()"
+          [class.active]="currentSection === 'personal-photo'">
           <i class="fas fa-home"></i>Home
         </a>
-        <a href="#" (click)="navigateToSection('about'); closeMobileMenu(); $event.preventDefault()" 
-           [class.active]="currentSection === 'about'">
+        <a href="#" (click)="navigateToSection('about'); closeMobileMenu(); $event.preventDefault()"
+          [class.active]="currentSection === 'about'">
           <i class="fas fa-user"></i>About
         </a>
-        <a href="#" (click)="navigateToSection('projects'); closeMobileMenu(); $event.preventDefault()" 
-           [class.active]="currentSection === 'projects'">
+        <a href="#" (click)="navigateToSection('projects'); closeMobileMenu(); $event.preventDefault()"
+          [class.active]="currentSection === 'projects'">
           <i class="fas fa-project-diagram"></i>Projects
         </a>
-        <a href="#" (click)="navigateToSection('experience'); closeMobileMenu(); $event.preventDefault()" 
-           [class.active]="currentSection === 'experience'">
+        <a href="#" (click)="navigateToSection('experience'); closeMobileMenu(); $event.preventDefault()"
+          [class.active]="currentSection === 'experience'">
           <i class="fas fa-briefcase"></i>Experience
         </a>
-        <a href="#" (click)="navigateToSection('contact'); closeMobileMenu(); $event.preventDefault()" 
-           [class.active]="currentSection === 'contact'">
+        <a href="#" (click)="navigateToSection('contact'); closeMobileMenu(); $event.preventDefault()"
+          [class.active]="currentSection === 'contact'">
           <i class="fas fa-address-book"></i>Contact
         </a>
       </div>
-      
+
       <div class="mobile-menu-actions">
         <button class="theme-toggle mobile-theme-toggle" (click)="toggleTheme()">
           <i [class]="isDarkTheme ? 'fas fa-sun' : 'fas fa-moon'"></i>
           <span>{{ isDarkTheme ? 'Light Mode' : 'Dark Mode' }}</span>
         </button>
-        
+
         <a href="assets/Gokulresume.pdf" download class="btn-download-resume-mobile">
           Resume<i class="fas fa-download"></i>
         </a>
       </div>
     </div>
   </nav>
-  
+
   <!-- Hero Section -->
+
   <section id="personal-photo" class="hero-section">
-  <div class="container">
-    <div class="hero-content">
-      <!-- Open to opportunities -->
-      <div class="hero-status">
-        <span class="status-dot"></span>
-        <span class="status-text">Open to opportunities</span>
-        <!-- Lottie animation goes HERE, after the text -->
-        <div #lottieContainer class="lottie-hello"></div>
+    <!-- Floating Tech Icons -->
+    <div class="floating-tech-icons">
+      <div class="floating-icon" style="--delay: 0s; --x: 10%; --y: 20%;">
+        <i class="fas fa-code"></i>
       </div>
-      
-      <!-- Your Name -->
-      <h1 class="hero-title">
-        Gokul Gopan
-      </h1>
-        
+      <div class="floating-icon" style="--delay: 1s; --x: 20%; --y: 60%;">
+        <i class="fas fa-palette"></i>
+      </div>
+      <div class="floating-icon" style="--delay: 2s; --x: 80%; --y: 30%;">
+        <i class="fas fa-database"></i>
+      </div>
+      <div class="floating-icon" style="--delay: 3s; --x: 70%; --y: 70%;">
+        <i class="fas fa-server"></i>
+      </div>
+      <div class="floating-icon" style="--delay: 4s; --x: 40%; --y: 40%;">
+        <i class="fas fa-mobile-alt"></i>
+      </div>
+      <div class="floating-icon" style="--delay: 5s; --x: 90%; --y: 80%;">
+        <i class="fas fa-cloud"></i>
+      </div>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <!-- Open to opportunities -->
+        <div class="hero-status">
+          <span class="status-dot"></span>
+          <span class="status-text">Open to opportunities</span>
+          <!-- Lottie animation goes HERE, after the text -->
+          <div #lottieContainer class="lottie-hello"></div>
+        </div>
+
+        <!-- Your Name -->
+        <h1 class="hero-title">
+          Gokul Gopan
+        </h1>
+
         <p class="hero-description">
-          Building beautiful, performant, and user-centric digital experiences that make a difference.
+          Software Engineer creating efficient, scalable systems with clean and intuitive UI.
         </p>
-        
+
         <div class="hero-social-links">
           <a href="https://github.com/Gokulgopan01" target="_blank" class="social-link" title="GitHub">
             <i class="fab fa-github"></i>
@@ -140,15 +140,12 @@
           <a href="https://linkedin.com/in/gokul-gopan-022b95235" target="_blank" class="social-link" title="LinkedIn">
             <i class="fab fa-linkedin"></i>
           </a>
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=gokulmittu01@gmail.com"
-              class="social-link"
-              title="Email"
-              target="_blank"
-              rel="noopener">
-              <i class="fas fa-envelope"></i>
-            </a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=gokulmittu01@gmail.com" class="social-link"
+            title="Email" target="_blank" rel="noopener">
+            <i class="fas fa-envelope"></i>
+          </a>
         </div>
-        
+
         <div class="hero-actions">
           <button class="btn-primary magnetic-button" (click)="navigateToSection('contact')">
             <i class="fas fa-envelope me-2"></i>Contact Me
@@ -168,83 +165,91 @@
         <h2 class="section-title">ABOUT ME</h2>
         <h3 class="section-subtitle">Crafting Software Excellence</h3>
       </div>
-      
+
       <div class="about-grid">
         <!-- Left Column: Description & Highlights -->
         <div class="about-left">
           <div class="about-content">
             <p class="about-description">
-              I'm a passionate Full Stack Developer with 3+ years of experience building web applications that users love. 
-              I specialize in creating seamless digital experiences that combine beautiful design with robust functionality.
+              I’m a Software Engineer with 3 years of experience designing and building scalable web
+              applications with a strong focus on performance, reliability, and user experience.
+              I specialize in developing end-to-end solutions using Python (Django, FastAPI) and
+              modern JavaScript frameworks like Angular, delivering seamless, responsive interfaces
+              backed by robust backend systems.
             </p>
-            
+
             <p class="about-description">
-              When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, 
-              or sharing knowledge through blog posts and mentoring.
+              My expertise spans across building RESTful APIs, microservices architectures, and real-time systems using
+              WebSockets, along with working extensively on databases such as MySQL, PostgreSQL, and MongoDB. I also
+              have hands-on experience in cloud and DevOps practices, including deploying applications on AWS,
+              containerizing services with Docker, and setting up CI/CD pipelines using Jenkins to ensure efficient and
+              reliable delivery.
+            </p>
+
+            <p class="about-description">
+              Beyond core development, I have worked with automation and data-driven solutions using tools like Selenium
+              and Scikit-learn, giving me the ability to integrate intelligent features and streamline workflows.
             </p>
           </div>
-          
+
           <!-- Horizontal Rule -->
           <div class="section-divider"></div>
-          
+
           <!-- Interactive Code Block -->
-        <div class="code-block-container">
-          <div class="code-block">
+          <div class="code-block-container">
+            <div class="code-block">
 
-            <!-- Header -->
-            <div class="code-header">
-              <div class="code-dots">
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
-                <span class="dot green"></span>
+              <!-- Header -->
+              <div class="code-header">
+                <div class="code-dots">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                </div>
+
+                <div class="code-tabs">
+                  <button class="code-tab active" data-tab="python">Python</button>
+                  <button class="code-tab" data-tab="typescript">JavaScript</button>
+                  <button class="code-tab" data-tab="sql">SQL</button>
+                </div>
               </div>
 
-              <div class="code-tabs">
-                <button class="code-tab active" data-tab="python">Python</button>
-                <button class="code-tab" data-tab="typescript">TypeScript</button>
-                <button class="code-tab" data-tab="sql">SQL</button>
+              <!-- Code Content -->
+              <div class="code-content">
+                <pre class="language-python active"><code>def initialize_backend():
+    print("Starting backend services...")
+    print("REST APIs configured")
+    print("Authentication & authorization enabled")
+    print("Security measures applied")
+    print("🚀 Backend is live and running")</code></pre>
+
+                <pre class="language-typescript"><code>console.log("Initializing frontend application...");
+console.log("Components loaded successfully");
+console.log("Event listeners attached");
+console.log("✨ UI is responsive and interactive");</code></pre>
+
+                <pre class="language-sql"><code>SELECT 'Initializing database...';
+SELECT 'Relationships established';
+SELECT 'Queries optimized';
+SELECT '📊 Database ready for operations';</code></pre>
               </div>
+
+              <!-- Output (hidden initially) -->
+              <div class="code-output hidden">
+                <div class="output-header">Output</div>
+                <div class="output-content"></div>
+              </div>
+
+              <button class="btn-run-code">
+                <i class="fas fa-play"></i> Run Code
+              </button>
+
             </div>
-
-            <!-- Code Content -->
-            <div class="code-content">
-              <pre class="language-python active"><code>
-        def build_amazing_app():
-            print("Initializing application...")
-            print("✓ Database connected")
-            print("✓ API running")
-            print("🎉 Ready")
-              </code></pre>
-
-              <pre class="language-typescript"><code>
-        console.log("Compiling TypeScript...");
-        console.log("✓ Modules loaded");
-        console.log("✓ Build success");
-              </code></pre>
-
-              <pre class="language-sql"><code>
-        SELECT 'Connecting DB...';
-        SELECT '✓ Tables ready';
-        SELECT '✓ Query executed';
-              </code></pre>
-            </div>
-
-            <!-- Output (hidden initially) -->
-            <div class="code-output hidden">
-              <div class="output-header">Output</div>
-              <div class="output-content"></div>
-            </div>
-
-            <button class="btn-run-code">
-              <i class="fas fa-play"></i> Run Code
-            </button>
-
           </div>
-        </div>
-                        
+
           <!-- Horizontal Rule -->
           <div class="section-divider"></div>
-          
+
           <!-- Highlights -->
           <div class="highlights-section">
             <div class="highlights-grid">
@@ -252,17 +257,17 @@
                 <h4 class="highlight-title">Clean Code</h4>
                 <p class="highlight-description">Writing maintainable, scalable solutions</p>
               </div>
-              
+
               <div class="highlight-item">
                 <h4 class="highlight-title">Design Focused</h4>
                 <p class="highlight-description">Pixel-perfect implementations</p>
               </div>
-              
+
               <div class="highlight-item">
                 <h4 class="highlight-title">Performance</h4>
                 <p class="highlight-description">Optimized for speed and efficiency</p>
               </div>
-              
+
               <div class="highlight-item">
                 <h4 class="highlight-title">Innovation</h4>
                 <p class="highlight-description">Always learning new technologies</p>
@@ -270,59 +275,70 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Right Column: Skills & Stats -->
         <div class="about-right">
           <!-- Skills Section -->
           <div class="skills-section">
+
             <div class="skills-category">
               <h4 class="skills-category-title">FRONTEND</h4>
               <div class="skills-buttons">
                 <span class="skill-button">Angular</span>
-                <span class="skill-button">TypeScript</span>
-                <span class="skill-button">Javascript</span>
+                <span class="skill-button">JavaScript</span>
+                <span class="skill-button">HTML</span>
+                <span class="skill-button">CSS / SCSS</span>
                 <span class="skill-button">Bootstrap</span>
                 <span class="skill-button">Ajax</span>
               </div>
             </div>
-            
+
             <div class="skills-category">
               <h4 class="skills-category-title">BACKEND</h4>
               <div class="skills-buttons">
                 <span class="skill-button">Python</span>
                 <span class="skill-button">Django</span>
                 <span class="skill-button">FastAPI</span>
-                <span class="skill-button">C++</span>
-                <span class="skill-button">MySQL</span>
-              </div>
-            </div>
-            
-            <div class="skills-category">
-              <h4 class="skills-category-title">TOOLS</h4>
-              <div class="skills-buttons">
-                <span class="skill-button">Git</span>
-                <span class="skill-button">Docker</span>
-                <span class="skill-button">AWS</span>
-                <span class="skill-button">Jenkins</span>
-                <span class="skill-button">VS Code</span>
+                <span class="skill-button">REST APIs</span>
+                <span class="skill-button">WebSockets</span>
+                <span class="skill-button">Microservices</span>
               </div>
             </div>
 
             <div class="skills-category">
-              <h4 class="skills-category-title">DATA & ML</h4>
+              <h4 class="skills-category-title">DATABASES</h4>
               <div class="skills-buttons">
-                <span class="skill-button">Scikit-Learn</span>
-                <span class="skill-button">Matplotlib</span>
-                <span class="skill-button">Pandas</span>
-                <span class="skill-button">Selenium</span>
-                <span class="skill-button">BeautifulSoup</span>
+                <span class="skill-button">MySQL</span>
+                <span class="skill-button">PostgreSQL</span>
+                <span class="skill-button">MongoDB</span>
               </div>
             </div>
+
+            <div class="skills-category">
+              <h4 class="skills-category-title">DEVOPS & CLOUD</h4>
+              <div class="skills-buttons">
+                <span class="skill-button">AWS</span>
+                <span class="skill-button">Docker</span>
+                <span class="skill-button">CI/CD</span>
+                <span class="skill-button">Jenkins</span>
+                <span class="skill-button">Git</span>
+              </div>
+            </div>
+
+            <div class="skills-category">
+              <h4 class="skills-category-title">DATA & AUTOMATION</h4>
+              <div class="skills-buttons">
+                <span class="skill-button">Scikit-learn</span>
+                <span class="skill-button">AI / ML</span>
+                <span class="skill-button">Selenium</span>
+              </div>
+            </div>
+
           </div>
-          
+
           <!-- Horizontal Rule -->
           <div class="section-divider"></div>
-          
+
           <!-- Stats Section -->
           <div class="stats-section">
             <div class="stats-grid">
@@ -330,15 +346,10 @@
                 <h3 class="stat-number">3+</h3>
                 <p class="stat-label">Years Experience</p>
               </div>
-              
+
               <div class="stat-item">
-                <h3 class="stat-number">8+</h3>
+                <h3 class="stat-number">15+</h3>
                 <p class="stat-label">Projects Completed</p>
-              </div>
-              
-              <div class="stat-item">
-                <h3 class="stat-number">2+</h3>
-                <p class="stat-label">Happy Clients</p>
               </div>
             </div>
           </div>
@@ -357,51 +368,45 @@
           A selection of my recent work. Each project is crafted with attention to detail and modern best practices.
         </p>
       </div>
-      
+
       <div class="projects-grid">
         <div class="project-card" *ngFor="let project of projects; let i = index">
           <!-- Project Image with Hover Overlay -->
           <div class="project-image-container">
-            <img [src]="project.image || 'assets/Profile_pic.jpg'" 
-                 [alt]="project.title" 
-                 class="project-image">
-            
+            <img [src]="project.image || 'assets/Profile_pic.jpg'" [alt]="project.title" class="project-image">
+
             <!-- Hover Overlay with Icons -->
             <div class="project-overlay">
               <a [href]="project.link" target="_blank" class="overlay-icon">
                 <i class="fab fa-github"></i>
               </a>
-              <a [href]="project.visitLink || '#'" 
-                 target="_blank" 
-                 class="overlay-icon"
-                 [class.disabled]="!project.visitLink">
+              <a [href]="project.visitLink || '#'" target="_blank" class="overlay-icon"
+                [class.disabled]="!project.visitLink">
                 <i class="fas fa-external-link-alt"></i>
               </a>
               <button class="overlay-icon" (click)="openImage(project.image)">
-  <i class="fas fa-eye"></i>
-</button>
+                <i class="fas fa-eye"></i>
+              </button>
             </div>
           </div>
-          
+
           <!-- Project Tech Tags -->
           <div class="project-tech-tags">
             <span class="tech-tag" *ngFor="let tag of getTechTags(project.tech)">{{ tag }}</span>
           </div>
-          
+
           <!-- Project Content -->
           <div class="project-content">
             <h3 class="project-title">{{ project.title }}</h3>
             <p class="project-description">{{ project.desc }}</p>
-            
+
             <!-- Project Actions -->
             <div class="project-actions">
               <a [href]="project.link" target="_blank" class="btn-source-code magnetic-button">
                 <i class="fab fa-github me-2"></i>Source Code
               </a>
-              <a [href]="project.visitLink || '#'" 
-                 target="_blank" 
-                 class="btn-visit-site magnetic-button"
-                 [class.disabled]="!project.visitLink">
+              <a [href]="project.visitLink || '#'" target="_blank" class="btn-visit-site magnetic-button"
+                [class.disabled]="!project.visitLink">
                 <i class="fas fa-external-link-alt me-2"></i>Visit Site
               </a>
             </div>
@@ -418,18 +423,17 @@
         <h2 class="section-title">JOURNEY</h2>
         <h3 class="section-subtitle">Experience & Education</h3>
       </div>
-      
+
       <div class="experience-timeline">
         <!-- Center Line -->
         <div class="timeline-line"></div>
-        
+
         <!-- Timeline Items -->
         <div class="timeline-items">
-          <div class="timeline-item" *ngFor="let exp of experiences; let i = index" 
-               [class.timeline-item-left]="i % 2 === 0" 
-               [class.timeline-item-right]="i % 2 !== 0">
+          <div class="timeline-item" *ngFor="let exp of experiences; let i = index"
+            [class.timeline-item-left]="i % 2 === 0" [class.timeline-item-right]="i % 2 !== 0">
             <div class="timeline-dot"></div>
-            
+
             <div class="timeline-content">
               <div class="timeline-period">{{ exp.period }}</div>
               <h3 class="timeline-title">{{ exp.position }}</h3>
@@ -452,7 +456,7 @@
           Have a project in mind? I'd love to hear about it. Send me a message and let's create something amazing.
         </p>
       </div>
-      
+
       <div class="contact-grid">
         <!-- Left Column: Contact Information -->
         <div class="contact-info">
@@ -460,7 +464,7 @@
           <p class="contact-info-note">
             Feel free to reach out through any of these channels. I typically respond within 24 hours.
           </p>
-          
+
           <div class="contact-details">
             <div class="contact-detail-item">
               <div class="contact-icon">
@@ -471,7 +475,7 @@
                 <p class="contact-value">gokulmittu01&#64;gmail.com</p>
               </div>
             </div>
-            
+
             <div class="contact-detail-item">
               <div class="contact-icon">
                 <i class="fas fa-phone"></i>
@@ -481,7 +485,7 @@
                 <p class="contact-value">+91 9072239489</p>
               </div>
             </div>
-            
+
             <div class="contact-detail-item">
               <div class="contact-icon">
                 <i class="fas fa-map-marker-alt"></i>
@@ -493,37 +497,26 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Right Column: Contact Form -->
         <div class="contact-form-container">
           <form (ngSubmit)="submitForm()" #contactForm="ngForm" class="contact-form">
             <div class="form-group">
               <label class="form-label">Your Name</label>
-              <input type="text" 
-                     placeholder="Enter your name" 
-                     name="name" 
-                     ngModel required 
-                     class="form-input" />
+              <input type="text" placeholder="Enter your name" name="name" ngModel required class="form-input" />
             </div>
-            
+
             <div class="form-group">
               <label class="form-label">Your Email</label>
-              <input type="email" 
-                     placeholder="gokul@example.com" 
-                     name="email" 
-                     ngModel required 
-                     class="form-input" />
+              <input type="email" placeholder="gokul@example.com" name="email" ngModel required class="form-input" />
             </div>
-            
+
             <div class="form-group">
               <label class="form-label">Message</label>
-              <textarea placeholder="Tell me about your project..." 
-                       name="message" 
-                       ngModel required 
-                       class="form-textarea" 
-                       rows="6"></textarea>
+              <textarea placeholder="Tell me about your project..." name="message" ngModel required
+                class="form-textarea" rows="6"></textarea>
             </div>
-            
+
             <button type="submit" class="btn-submit magnetic-button" [class.loading]="sending">
               <span *ngIf="!sending">Send Message</span>
               <span *ngIf="sending">Sending...</span>
@@ -552,22 +545,24 @@
     <div class="modal-content">
       <span class="close" (click)="closeProject()">&times;</span>
       <h2><i class="fas fa-folder-open"></i> {{ selectedProject.title }}</h2>
-      
+
       <div class="project-image" *ngIf="selectedProject.image">
-        <img [src]="selectedProject.image || 'assets/Profile_pic.jpg'" alt="{{ selectedProject.title }}" class="img-fluid">
+        <img [src]="selectedProject.image || 'assets/Profile_pic.jpg'" alt="{{ selectedProject.title }}"
+          class="img-fluid">
       </div>
-      
+
       <p class="mt-4"><i class="fas fa-info-circle"></i> {{ selectedProject.desc }}</p>
-      
+
       <div class="modal-tech">
         <strong><i class="fas fa-code"></i> Technologies:</strong> {{ selectedProject.tech }}
       </div>
-      
+
       <div class="modal-buttons">
         <a [href]="selectedProject.link" target="_blank" class="btn btn-dark me-2">
           <i class="fab fa-github me-2"></i>View on GitHub
         </a>
-        <a [href]="selectedProject.visitLink || '#'" target="_blank" class="visit-btn" *ngIf="selectedProject.visitLink">
+        <a [href]="selectedProject.visitLink || '#'" target="_blank" class="visit-btn"
+          *ngIf="selectedProject.visitLink">
           <i class="fas fa-external-link-alt me-2"></i>Visit Site
         </a>
       </div>
