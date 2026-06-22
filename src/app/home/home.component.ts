@@ -51,25 +51,22 @@ export class HomeComponent implements AfterViewInit, OnInit {
   // Your existing arrays
   projects: Project[] = [
     {
-      id: 'project1',
-      category: 'Full-Stack Development',
+      id: 'project1', category: 'AI-Powered E-Commerce',
       title: 'Tail Cart (2025)',
-      tech: 'Django, Angular, Gemini-AI, FCM, JWT,  AWS',
-      desc: `A secure, full-stack platform for pet owners to manage and share pet details. Includes health record uploads, digital vaccination tracking, and QR-enabled keychains for lost-and-found identification.`,
+      tech: 'Angular, Django, MySQL, Gemini AI, JWT, RBAC, AWS EC2, AWS RDS, Docker',
+      desc: `Built and deployed a scalable pet e-commerce platform supporting 1,000+ concurrent users. Implemented JWT-based authentication, role-based access control, AI-powered pet health recommendations using Gemini AI, and optimized API performance to reduce response times by 35%. Deployed on AWS EC2 with RDS and Load Balancer for high availability.`,
       link: 'https://github.com/Gokulgopan01/Tail-Cart-frontend',
       visitLink: 'https://tailcart.vercel.app/',
-      image: 'assets/images/Tail-cart.jpg',
+      image: 'assets/images/Tail-cart.png'
     },
     {
-      id: 'project2',
-      category: 'Web Application',
-      title: 'Work Track (2024)',
-      tech: 'Django, Angular, MySQL, RxJS, Angular Material UI',
-      desc: `A role-based task management dashboard for monitoring employee progress. Features include CRUD operations, task status analytics, and access control layers.`,
-      link: 'https://github.com/Gokulgopan01/Work-Track',
-      visitLink: '',
-      image: '/assets/images/Work_tracking.png',
+      id: 'project2', category: 'Overseas Consultancy Platform',
+      title: 'Solvers Global (2025)',
+      tech: 'Angular, FastAPI, AioMySQL, JWT, RBAC, Alembic, Docker, AWS',
+      desc: `Developed a scalable consultancy platform using Angular and FastAPI with a microservices-ready architecture. Implemented asynchronous APIs using FastAPI and AioMySQL, secured the platform with JWT authentication, role-based access control, and API rate limiting, and improved performance through caching, pagination, and lazy loading.`,
+      link: '', visitLink: 'https://solversglobal.in', image: 'assets/images/solvers.png'
     },
+    { id: 'project3', category: 'Enterprise Workflow Management', title: 'Work Track (2024)', tech: 'Django, Angular, MySQL, RxJS, Angular Material, RBAC', desc: `Built a role-based task management platform for monitoring employee progress and business workflows. Implemented CRUD operations, task analytics dashboards, role-based permissions, and real-time status tracking to improve operational efficiency.`, link: 'https://github.com/Gokulgopan01/Work-Track', visitLink: '', image: 'assets/images/Work_tracking.png' },
     {
       id: 'project3',
       category: 'Automation & ML',
@@ -80,16 +77,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
       visitLink: '',
       image: '',
     },
-    {
-      id: 'project4',
-      category: 'AI & E-Commerce',
-      title: 'AI-Powered Shopping Cart',
-      tech: 'Django, Angular, PostgreSQL, Gemini-AI',
-      desc: `An AI-integrated e-commerce system where users can generate custom outfit designs through text prompts. Includes product recommendation and order tracking.`,
-      link: 'https://github.com/Gokulgopan01/Shopping_Cart',
-      visitLink: '',
-      image: '/assets/images/Shop_cart.png',
-    }
+
+    { id: 'project5', category: 'AI & E-Commerce', title: 'AI-Powered Shopping Cart', tech: 'Django, Angular, PostgreSQL, Gemini AI', desc: `Developed an AI-integrated e-commerce platform that allows users to generate custom outfit designs through text prompts. Implemented AI-powered recommendations, secure order management, and personalized shopping experiences.`, link: 'https://github.com/Gokulgopan01/Shopping_Cart', visitLink: '', image: 'assets/images/Shop_cart.png' }
   ];
 
   experiences: Experience[] = [
@@ -279,8 +268,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
     // Clear existing particles
     this.particles = [];
 
-    // Create particles - SAME AS DESKTOP
-    const particleCount = 60;
+    // Create particles - dynamic count based on screen size to optimize rendering
+    const particleCount = this.isMobile ? 25 : 60;
     for (let i = 0; i < particleCount; i++) {
       this.particles.push({
         x: Math.random() * this.canvas.width,
@@ -293,7 +282,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
     }
 
     this.animateParticles();
-    window.addEventListener('resize', () => this.resizeCanvas());
   }
 
   resizeCanvas() {

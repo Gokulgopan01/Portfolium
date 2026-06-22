@@ -22,15 +22,21 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: #ffffff; /* SOLID WHITE FOR LIGHT THEME */
+  background: #ffffff;
+  /* SOLID WHITE FOR LIGHT THEME */
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 1.25rem 0; /* SLIGHTLY REDUCED INITIAL PADDING */
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 1.25rem 0;
+  /* SLIGHTLY REDUCED INITIAL PADDING */
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .dark-theme .navbar {
-  background: rgba(25, 25, 25, 0.98) !important; /* SOLID DARK FOR DARK THEME */
+  background: rgba(25, 25, 25, 0.98) !important;
+  /* SOLID DARK FOR DARK THEME */
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
@@ -44,7 +50,8 @@
 }
 
 .dark-theme .navbar.navbar-scrolled {
-  background: rgba(25, 25, 25, 1) !important; /* SOLID ON SCROLL */
+  background: rgba(25, 25, 25, 1) !important;
+  /* SOLID ON SCROLL */
   padding: 0.75rem 0;
   border-bottom: 1px solid rgba(139, 92, 246, 0.4);
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
@@ -1833,7 +1840,8 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1; /* BEHIND HERO CONTENT */
+  z-index: 1;
+  /* BEHIND HERO CONTENT */
 }
 
 .floating-icon {
@@ -1854,11 +1862,20 @@ body {
   left: var(--x);
   top: var(--y);
   border: 1px solid rgba(139, 92, 246, 0.2);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.floating-icon i {
+  transition: transform 0.3s ease;
 }
 
 .floating-icon:hover {
   background: rgba(139, 92, 246, 0.2);
-  transform: scale(1.2);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.floating-icon:hover i {
+  transform: scale(1.3);
 }
 
 @keyframes floatIcon {
@@ -3583,5 +3600,240 @@ section {
   .skill-button {
     padding: 0.4rem 0.7rem !important;
     font-size: 0.75rem !important;
+  }
+}
+
+/* ===================== */
+/* AWARDS SECTION STYLING */
+/* ===================== */
+.awards-section {
+  padding: 8rem 0;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.dark-theme .awards-section {
+  background: #0a0a0a;
+}
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.award-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark-theme .award-card {
+  background: rgba(26, 26, 26, 0.6);
+  border-color: rgba(139, 92, 246, 0.25);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+}
+
+.award-card:hover {
+  transform: translateY(-8px);
+  border-color: #8b5cf6;
+  box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
+}
+
+.dark-theme .award-card:hover {
+  border-color: #a78bfa;
+  box-shadow: 0 15px 35px rgba(139, 92, 246, 0.3);
+}
+
+/* Card top glow line */
+.award-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.award-card:hover::before {
+  transform: translateX(100%);
+}
+
+.dark-theme .award-card::before {
+  background: linear-gradient(90deg, transparent, #a78bfa, transparent);
+}
+
+.award-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #1a1a1a;
+  transition: color 0.3s ease;
+}
+
+.dark-theme .award-card h4 {
+  color: #ffffff;
+}
+
+.award-card p {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #8b5cf6;
+  margin: 0;
+}
+
+.dark-theme .award-card p {
+  color: #a78bfa;
+}
+
+/* ===================== */
+/* TINY MOBILE OPTIMIZATIONS (DOWN TO 300PX) */
+/* ===================== */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.85rem !important;
+  }
+
+  .hero-description {
+    font-size: 0.95rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .hero-actions {
+    gap: 0.75rem !important;
+    width: 100% !important;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    padding: 0.8rem 1.5rem !important;
+    font-size: 0.95rem !important;
+    min-height: 50px !important;
+  }
+
+  /* Compact About section */
+  .about-section {
+    padding: 2rem 0 !important;
+  }
+
+  .stat-item {
+    min-width: 80px !important;
+  }
+
+  .stat-number {
+    font-size: 1.5rem !important;
+  }
+
+  /* Compact Timeline for narrow reading width */
+  .experience-timeline {
+    padding-left: 0.5rem;
+  }
+
+  .timeline-line {
+    left: 15px !important;
+  }
+
+  .timeline-item-left,
+  .timeline-item-right {
+    padding-left: 35px !important;
+  }
+
+  .timeline-dot {
+    left: 15px !important;
+  }
+
+  .timeline-content {
+    padding: 1rem !important;
+  }
+
+  .timeline-content::before {
+    left: -8px !important;
+    border-width: 8px 8px 8px 0 !important;
+  }
+
+  .timeline-title {
+    font-size: 1.15rem !important;
+  }
+
+  .timeline-company {
+    font-size: 0.95rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .timeline-description {
+    font-size: 0.85rem !important;
+  }
+
+  /* Contact section layout compacting */
+  .contact-section {
+    padding: 3rem 0 !important;
+  }
+
+  .contact-info,
+  .contact-form-container {
+    padding: 1rem !important;
+  }
+
+  .contact-detail-item {
+    padding: 0.75rem !important;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 0.75rem 1rem !important;
+  }
+
+  /* Navbar padding adjustments */
+  .navbar-container {
+    padding: 0 0.75rem !important;
+  }
+
+  .navbar-logo .logo-text {
+    font-size: 1.25rem !important;
+  }
+
+  /* Awards section spacing */
+  .awards-section {
+    padding: 4rem 0 !important;
+  }
+
+  .awards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .award-card {
+    padding: 1.75rem 1.25rem !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero-title {
+    font-size: 1.65rem !important;
+  }
+
+  .navbar-logo .logo-text {
+    font-size: 1.15rem !important;
+  }
+
+  .stat-number {
+    font-size: 1.35rem !important;
   }
 }
