@@ -970,15 +970,17 @@
 }
 
 .stats-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
+  align-items: start;
+  gap: 1.5rem;
+  width: 100%;
 }
 
 .stat-item {
-  flex: 1;
   text-align: center;
+  min-width: 0;
 }
 
 .stat-number {
@@ -2934,24 +2936,25 @@ section {
   }
 
   .stats-grid {
-    flex-direction: row !important;
-    justify-content: space-around !important;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    justify-content: space-between !important;
+    align-items: start !important;
+    gap: 0.5rem !important;
     background: transparent !important;
     border: none !important;
-    width: 100%;
+    width: 100% !important;
   }
 
   .stat-item {
-    flex: none !important;
-    width: 30% !important;
-    min-width: 90px;
-    padding: 0.75rem 0.5rem;
+    flex: 1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    padding: 0.5rem 0.15rem !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    padding: 0.75rem 0.5rem !important;
   }
 
   .stat-number {
@@ -3516,9 +3519,10 @@ section {
   }
 
   .stat-item {
-    width: 100% !important;
-    max-width: 200px;
+    width: auto !important;
+    max-width: none !important;
     margin: 0 auto;
+    min-width: 0 !important;
   }
 }
 
@@ -3533,11 +3537,14 @@ section {
   }
 
   .stats-grid {
-    gap: 1rem;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 0.5rem !important;
   }
 
   .stat-item {
-    width: 28% !important;
+    width: auto !important;
+    min-width: 0 !important;
   }
 }
 
@@ -3791,7 +3798,7 @@ section {
   }
 
   .stat-item {
-    min-width: 80px !important;
+    min-width: 0 !important;
   }
 
   .stat-number {
