@@ -1,8 +1,9 @@
-import { Component, HostListener, AfterViewInit, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, HostListener, AfterViewInit, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import lottie from 'lottie-web';
+import Lenis from 'lenis';
 
 interface Project {
   id: string;
@@ -29,7 +30,8 @@ interface Experience {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements AfterViewInit, OnInit {
+export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
+  lenis?: Lenis;
   currentSection: string = 'personal-photo';
   sections = ['personal-photo', 'about', 'projects', 'experience', 'contact'];
   sending = false;
@@ -149,6 +151,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
+    this.initLenis();
     this.initializeScrollAnimations();
     this.initializeParticles();
     this.initializeCodeBlock();
@@ -158,12 +161,26 @@ export class HomeComponent implements AfterViewInit, OnInit {
     window.addEventListener('orientationchange', () => {
       setTimeout(() => {
         this.resizeCanvas();
+        this.lenis?.resize();
         // Reinitialize Lottie on orientation change
         if (this.lottieAnimation) {
           this.lottieAnimation.destroy();
           this.initializeLottieAnimation();
         }
       }, 100);
+    });
+  }
+
+  initLenis() {
+    this.lenis = new Lenis({
+      autoRaf: true,
+      smoothWheel: true,
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+
+    this.lenis.on('scroll', (e: any) => {
+      this.isScrolled = (e.scroll || window.pageYOffset) > 50;
     });
   }
 
@@ -225,6 +242,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
   openImage(image?: string) {
     if (!image) return;
     this.previewImage = image;
+    this.lenis?.stop();
 
     // Save current scroll position before locking
     const scrollY = window.scrollY;
@@ -239,6 +257,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   closeImage() {
     this.previewImage = undefined;
+    this.lenis?.start();
 
     // COMPLETELY reset all body styles
     const scrollY = Math.abs(parseInt(document.body.style.top || '0'));
@@ -450,6 +469,10 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   // Don't forget to clean up
   ngOnDestroy() {
+    if (this.lenis) {
+      this.lenis.destroy();
+    }
+
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
     }
@@ -529,11 +552,13 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   openProject(project: any) {
     this.selectedProject = project;
+    this.lenis?.stop();
     document.body.style.overflow = 'hidden';
   }
 
   closeProject() {
     this.selectedProject = null;
+    this.lenis?.start();
     document.body.style.overflow = 'auto';
   }
 
@@ -541,10 +566,14 @@ export class HomeComponent implements AfterViewInit, OnInit {
     this.currentSection = sectionId;
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+      if (this.lenis) {
+        this.lenis.scrollTo(element, { offset: -70, duration: 1.2 });
+      } else {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 /* Global Styles - Bootstrap & FontAwesome already installed */
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "lenis/dist/lenis.css";
 
 /* Light Theme */
 :root {
@@ -32,11 +33,11 @@
   --gradient-end: #6610f2;
 }
 
-/* Allow vertical scroll naturally */
-html, body {
-  height: 100%;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  scroll-behavior: smooth;
+/* Allow vertical scroll naturally with Lenis */
+html,
+body {
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
 }
 
 body {
