@@ -437,6 +437,63 @@
   }
 }
 
+/* Mobile Navbar for 750px and below: Menu bar on left corner, Name on right corner */
+@media (max-width: 750px) {
+  .navbar {
+    width: 100% !important;
+  }
+
+  .navbar-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 1rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .navbar-right {
+    order: 1 !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    margin: 0 !important;
+    min-width: unset !important;
+  }
+
+  .navbar-actions {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    margin: 0 !important;
+  }
+
+  .mobile-menu-toggle {
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .navbar-logo {
+    order: 2 !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    text-align: right !important;
+    margin: 0 !important;
+    min-width: unset !important;
+  }
+
+  .navbar-logo .logo-text {
+    padding-right: 0 !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+  }
+}
+
 /* Backdrop for mobile menu */
 .mobile-menu-backdrop {
   position: fixed;
